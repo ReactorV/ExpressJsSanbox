@@ -1,7 +1,20 @@
-const http = require("http")
+const express = require("express")
 
-const routes = require("./routs")
+const app = express()
 
-const server = http.createServer(routes)
+app.use("/", (req, res, next) => {
+    console.log("This Always runs")
+    next()
+})
 
-server.listen(4000)
+app.use("/add-products", (req, res, next) => {
+    console.log("Add products page")
+    res.send("<h1>Add products page</h1>")
+})
+
+app.use("/", (req, res, next) => {
+    console.log("Hello from ExpressJS")
+    res.send("<h1>Hello from ExpressJS!)</h1>")
+})
+
+app.listen(3001)
